@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adult blocker</title>
+	<link rel="shortcut icon" type="image/png" href="ADULT Blocker.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+      
+
+      .navbar {
+  overflow: hidden;
+  background-color: #333; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: deepskyblue;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: deepskyblue;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+  
+  #scbx/*scarch box*/
+  {
+   width: 90%;
+   /*margin-left: -5px;*/
+   border-radius: 10px;
+   height: 25px;
+   border-color: green;
+   border-width: 3px;
+  }
+  #swrs/*search result*/
+  {
+	width: 100%;
+	height: auto;
+  }
+  #stat
+  {
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    background-color: white;
+    
+  }
+  
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: rgb(110, 142, 225);
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=text] {
+  width: auto;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+body {
+        margin: 0;
+        padding: 0;
+        /* background-color: #212331 */
+        background-image: linear-gradient(to bottom, rgb(0,191,255), rgb(250,0, 0, 0));
+        
+      }
+.box {
+  padding:11% 0; /* The padding is the area for the shapes, adjust it based on the ratio of the shape*/
+  height:100px; /* to illustrate the space for the content */
+  background:
+    url(https://i.stack.imgur.com/mG3Vb.png) top   /100% auto,
+    url(https://i.stack.imgur.com/JSEyE.png) bottom/100% auto,
+    linear-gradient(#387dff,#387dff) content-box; /* Color between the shapes only on the content and not the padding*/
+  background-repeat:no-repeat;
+}
+
+
+
+
+
+	</style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <div class="subnav">
+      <button class="subnavbtn">About <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <p>We are Rollin!!!!!! </p>
+        <p>You can contact with us using this email: sumanp.ece2018@nsec.ac.in</p>
+      </div>
+    </div> 
+  
+    <br>
+    <div style="margin-top: 10px;">
+      
+      <input type="text" id="scbx">
+      <button onclick="fun2()" style="background-color:darkblue; border-radius:20px;padding:6px;color: #fff; border-width: 2px;border-color: white;">Search</button>
+      <button style="background-color:darkblue; border-radius:20px; padding:6px; color: #fff; border-width: 2px;border-color: white; position: static;" class="open-button" onclick="openForm()">Block</button>
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h2>Blocks websites you don't like</h2>
+      
+          <label for="email"><b>Website Name</b></label>
+          <input type="text" placeholder="Enter Website Name" name="email" required>
+          <br>
+          <label for="psw"><b>Link</b></label>
+          <input type="text" placeholder="Enter Link" name="psw" required>
+      
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+    </div>
+    
+ 
+   
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script>
+    
+   <center>
+     <br>
+    <table>
+      <tr>
+       <td style="color:yellow;">Search status:</td>
+       <td><div id="stat"></div></td>
+    </tr>
+    </table>
+    <br>
+    <button style="background-color:darkblue; border-radius:20px;padding:6px;color: #fff; border-width: 2px;border-color: white;" onclick="fun3()">Scan qr code</button>
+   </center>
+   <br>
+  
+   <audio src="mixkit-facility-alarm-sound-999.wav" id="music1"></audio>
+   <script>
+    function fun2()
+    {
+      var a=document.getElementById("scbx").value;
+      if (a=="")
+      {
+        alert("Empty string")
+      }
+      else{
+       var b=a.toLowerCase();
+        text=["desi"];
+        text1=["porne"];
+        text2=["onlydesiporn"];
+        text3=["hothindisex"];
+        text4=["xxxindianporn2"];
+        text5=["desitelugusex"];
+        text6=["milf"];
+        text7=["mature"];
+        text8=["nude"];
+        text9=["blowjob"];
+        text10=["sxxxporn"];
+        text11=["superchat"];
+        text12=["superchat.live"];
+        text13=["https://superchat.live/Oh_Mona"];
+
+        for (var i=0; i < text.length; i++)
+     {
+        if ( b.search(text[i])==-1 && b.search(text1[i])==-1 && b.search(text2[i])==-1 && b.search(text3[i])==-1 && b.search(text4[i])==-1 && b.search(text5[i])==-1 && b.search(text6[i])==-1 && b.search(text7[i])==-1 && b.search(text8[i])==-1 && b.search(text9[i])==-1 && b.search(text10[i])==-1)
+            {
+             document.getElementById("stat").style.backgroundColor="greenyellow";
+             var total="https://www.google.com/search?q="+a;
+             window.open(total);
+             break;
+            }
+       
+        else
+          {
+            document.getElementById("stat").style.backgroundColor="red";
+            var b=document.getElementById("music1");
+            b.play();
+            alert("sorry! you can not visit this site");
+            break;
+          }
+      }
+
+      }
+    }
+   
+   </script>
+   <script src="html5-qrcode.min.js"></script>
+   <style>
+     .result{
+       background-color: green;
+       color:#fff;
+       padding:20px;
+       
+     }
+    /* .row{
+       display:flex;
+       
+     }*/
+   </style>
+   <center>
+    <br>
+   <h1>Adult Blocker</h1>
+   <style>
+h1 {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+</style>
+    <div style="opacity: 0;" id="opa">
+   
+   <div class="row">
+     <div class="col">
+       <div style="width:300px; background-color:black;" id="reader"></div>
+     </div>
+     <div class="col" style="padding:1px; color: white">
+       <h4>SCAN RESULT</h4>
+       <div id="result">Result Here</div>
+     </div>
+   </div>
+  </div>
+  </center>
+  
+   
+   <script type="text/javascript">
+   function onScanSuccess(qrCodeMessage) {
+       document.getElementById('result').innerHTML = '<span class="result">'+qrCodeMessage+'</span>';
+       if(document.getElementById('result').value!="")
+       {
+        document.getElementById("scbx").value=qrCodeMessage;
+
+       }
+   }
+   
+   function onScanError(errorMessage) {
+     //handle scan error
+   }
+   
+   var html5QrcodeScanner = new Html5QrcodeScanner(
+       "reader", { fps: 10, qrbox: 250 });
+   html5QrcodeScanner.render(onScanSuccess, onScanError);
+   ischeck=false
+   function fun4()
+    {
+      document.getElementById("opa").style.opacity=1;
+      ischeck=true;
+    }
+    function fun5()
+    {
+      ischeck=false;
+      document.getElementById("opa").style.opacity=0;
+    }
+    function fun3()
+    {
+      if(ischeck)
+      {
+        fun5();
+      }
+      else
+      {
+        fun4();
+      }
+    }
+   </script>
+   <div class="box">
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+    <br>
+   <br>
+   <br>
+    <footer><h3 style="color:greenyellow;">*Safe search</h3><h3 style="color: red;">*Unsafe search</h3>
+    
+    </footer>
+  </div>
+
+</body>
+</html>
